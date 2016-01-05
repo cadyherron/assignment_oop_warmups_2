@@ -32,3 +32,4 @@ t.tweet("This is my second tweet")
 
 t.each {|msg| puts msg}
 t.each {|msg| puts msg.upcase}
+t.map {|msg| puts msg.downcase}
