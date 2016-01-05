@@ -7,11 +7,13 @@ arr = [ [1, 2], [3, 4] ]
 class Array
 
   def deep_dup
+    puts "#{self.object_id}-Original"
     # target sub-arrays
-    array.each do |first_nesting|
-      while first_nesting.type? array
-        duped_array = call_each(array)
-
+    self.each do |first_nesting|
+        puts "#{first_nesting} - first_nest - #{first_nesting.object_id}"
+        duped_array = first_nesting.dup
+        puts "#{duped_array} - Duped - #{duped_array.object_id}"
+    end
 
     # duplicate sub-arrays
     # stitch sub-arrays together
@@ -23,9 +25,15 @@ class Array
 
   def call_each(array)
     array.each do |nesting|
-      nesting.dup
+      if nesting.is_a? Array
+        array.dup
+      else
+        nesting
+      end
     end
   end
 
 
 end
+
+arr.deep_dup
