@@ -10,13 +10,21 @@ class Array
 
   def deep_dup
     puts "#{self.object_id}-Original"
-    new_array = []
+    new_array = self
     # base case
-    if ! nest.is_a? Array 
+    if ! self.is_a? Array 
       return new_array
+    #recursive case
     else
-      self.each do |nest| 
-
+      new_array.each do |nest|
+      puts "#{nest} - nest" 
+        if !nest.is_a? Array
+          nest
+        else
+          nest.map!{|nested_array| nested_array.dup}
+        end
+      end
+    end
     # target sub-arrays
     self.each do |first_nesting|
         puts "#{first_nesting} - first_nest - #{first_nesting.object_id}"
